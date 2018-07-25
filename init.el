@@ -1,4 +1,6 @@
 ;;; init.el --------------------------------------------------------------------------------------------
+;;; Code:
+
 ;; User Info
 (setq user-full-name "Áquila Freitas")
 (setq user-mail-address "aquilacf@protonmail.com")
@@ -18,6 +20,7 @@
 
 ;; Inspiring message
 (defun display-startup-echo-area-message()
+  "Motivational message."
 	(message "Let the hacking begin!"))
 
 
@@ -42,8 +45,8 @@
 (require 'package)
 (setq package-enable-at-startup nil)
 (setq package-archives '(("melpa" . "http://melpa.org/packages/")
-						 ("gnu" . "http://elpa.gnu.org/packages/")
-						 ("marmalade" . "http://marmalade-repo.org/packages/")))
+			 ("gnu" . "http://elpa.gnu.org/packages/")
+			 ("marmalade" . "http://marmalade-repo.org/packages/")))
 (package-initialize)
 
 ;; Install use-package
@@ -70,16 +73,15 @@
 	:ensure t
 	:init
 		(custom-set-variables '(git-gutter:added-sign " +")
-							  '(git-gutter:deleted-sign " -")
-							  '(git-gutter:modified-sign " \u2502")
-							  '(git-gutter:separator-sign nil)
+				      '(git-gutter:deleted-sign " -")
+				      '(git-gutter:modified-sign " \u2502")
+				      '(git-gutter:separator-sign nil)
 
-							  '(git-gutter:lighter " GitG")
-							  '(git-gutter:window-width 2)
-							  '(git-gutter:update-interval 1)
-							  '(git-gutter:visual-line t))
-							  '(git-gutter:hide-gutter t)
-
+				      '(git-gutter:lighter " GitG")
+				      '(git-gutter:window-width 2)
+				      '(git-gutter:update-interval 1)
+				      '(git-gutter:visual-line t))
+		'(git-gutter:hide-gutter t)
 		(global-git-gutter-mode 1)
 
 	:config
@@ -100,6 +102,7 @@
 	:ensure t
 	:init
 		(global-flycheck-mode))
+
 
 
 ;;; init.el --------------------------------------------------------------------------------------------
