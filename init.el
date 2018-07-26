@@ -1,3 +1,5 @@
+;;; init.el --- Summary
+;;; Commentary:
 ;;; init.el --------------------------------------------------------------------------------------------
 ;;; Code:
 
@@ -11,6 +13,7 @@
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 (transient-mark-mode t)
+(xterm-mouse-mode t) ; enable mouse
 
 ;; No welcome screen
 (setq inhibit-startup-message t
@@ -18,11 +21,10 @@
       initial-major-mode 'text-mode
       inhibit-splash-screen t)
 
-;; Inspiring message
+;; Startup motivational message
 (defun display-startup-echo-area-message()
-  "Motivational message."
+  "Message that will display on the footer when opening EMACS."
 	(message "Let the hacking begin!"))
-
 
 
 ;; Other configs
@@ -30,6 +32,9 @@
 ;; Scroll without moving cursor
 (global-set-key (kbd "M-n") (kbd "C-u 1 C-v"))
 (global-set-key (kbd "M-p") (kbd "C-u 1 M-v"))
+(global-set-key (kbd "<mouse-3>") (kbd "C-y"))
+(global-set-key (kbd "<mouse-4>") (kbd "C-u 1 M-v"))
+(global-set-key (kbd "<mouse-5>") (kbd "C-u 1 C-v"))
 
 ;; Change all prompts to y or n
 (fset 'yes-or-no-p 'y-or-n-p)
@@ -82,7 +87,7 @@
 				      '(git-gutter:update-interval 1)
 				      '(git-gutter:visual-line t))
 		'(git-gutter:hide-gutter t)
-		(global-git-gutter-mode 1)
+		(global-git-gutter-mode t)
 
 	:config
 		(set-face-background 'git-gutter:added nil)
