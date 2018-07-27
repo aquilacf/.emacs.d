@@ -15,6 +15,13 @@
 (transient-mark-mode t)
 (xterm-mouse-mode t) ; enable mouse
 
+; Set unicode
+(prefer-coding-system 'utf-8)
+(set-default-coding-systems 'utf-8)
+(set-terminal-coding-system 'utf-8)
+(set-keyboard-coding-system 'utf-8)
+(setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING)) ; Treat clipboard input as UTF-8 string first.
+
 ;; No welcome screen
 (setq inhibit-startup-message t
       initial-scratch-message ""
@@ -74,6 +81,7 @@
 		(load-theme 'monokai t))
 
 ;; GIT gutter
+;@TODO: all lines show as modified when idle, update-interval is off meanwhile
 (use-package git-gutter
 	:ensure t
 	:init
@@ -81,10 +89,11 @@
 				      '(git-gutter:deleted-sign " -")
 				      '(git-gutter:modified-sign " \u2502")
 				      '(git-gutter:separator-sign nil)
+				      '(git-gutter:unchanged-sign nil)
 
 				      '(git-gutter:lighter " GitG")
 				      '(git-gutter:window-width 2)
-				      '(git-gutter:update-interval 1)
+				      '(git-gutter:update-interval 0)
 				      '(git-gutter:visual-line t))
 		'(git-gutter:hide-gutter t)
 		(global-git-gutter-mode t)
@@ -111,23 +120,4 @@
 
 
 ;;; init.el --------------------------------------------------------------------------------------------
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(git-gutter:added-sign " +")
- '(git-gutter:deleted-sign " -")
- '(git-gutter:lighter " Git")
- '(git-gutter:modified-sign " │")
- '(git-gutter:separator-sign nil)
- '(git-gutter:update-interval 1)
- '(git-gutter:visual-line t)
- '(git-gutter:window-width 2)
- '(package-selected-packages (quote (flycheck use-package monokai-theme git-gutter))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+
