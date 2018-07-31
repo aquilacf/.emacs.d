@@ -49,8 +49,11 @@
 ;; Turn off backups and autosaves. @todo: remove this
 (setq make-backup-files nil)
 (setq auto-save-default nil)
+(setq delete-trailing-lines nil) ; Prevent from deleting EOF line
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
 
-(setq-default truncate-lines t)
+(setq-default truncate-lines t) ; @todo: doesn't work very well with line number
+
 
 ;; Requires >v24.4
 ;; Install package repositories
