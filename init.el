@@ -1,6 +1,5 @@
-;;; init.el --- Summary
+;;; init.el --- EMACS
 ;;; Commentary:
-;;; init.el --------------------------------------------------------------------------------------------
 ;;; Code:
 
 ;; User Info
@@ -120,7 +119,10 @@
 	:init
 		(global-flycheck-mode))
 
+;; Load lisp files by context
+(load (concat user-emacs-directory "cpp/cpp"))
 
 
-;;; init.el --------------------------------------------------------------------------------------------
+
+;;; init.el ends here
 

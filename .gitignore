@@ -3,3 +3,5 @@ auto-save-list/
 elpa/
 
 network-security.data
+
+cpp/cpplint.py
