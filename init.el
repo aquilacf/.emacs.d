@@ -2,56 +2,11 @@
 ;;; Commentary:
 ;;; Code:
 
-;; User Info
-(setq user-full-name "Áquila Freitas")
-(setq user-mail-address "aquilacf@protonmail.com")
+; Load core
+(load (concat user-emacs-directory "configs/core"))
 
+(load-directory dir-modes)
 
-;; Interface
-(if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
-(if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
-(if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
-(transient-mark-mode t)
-(xterm-mouse-mode t) ; enable mouse
-
-; Set unicode
-(prefer-coding-system 'utf-8)
-(set-default-coding-systems 'utf-8)
-(set-terminal-coding-system 'utf-8)
-(set-keyboard-coding-system 'utf-8)
-(setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING)) ; Treat clipboard input as UTF-8 string first.
-
-;; No welcome screen
-(setq inhibit-startup-message t
-      initial-scratch-message ""
-      initial-major-mode 'text-mode
-      inhibit-splash-screen t)
-
-;; Startup motivational message
-(defun display-startup-echo-area-message()
-  "Message that will display on the footer when opening EMACS."
-	(message "Let the hacking begin!"))
-
-
-;; Other configs
-;; Key bindings
-;; Scroll without moving cursor
-(global-set-key (kbd "M-n") (kbd "C-u 1 C-v"))
-(global-set-key (kbd "M-p") (kbd "C-u 1 M-v"))
-(global-set-key (kbd "<mouse-3>") (kbd "C-y"))
-(global-set-key (kbd "<mouse-4>") (kbd "C-u 1 M-v"))
-(global-set-key (kbd "<mouse-5>") (kbd "C-u 1 C-v"))
-
-;; Change all prompts to y or n
-(fset 'yes-or-no-p 'y-or-n-p)
-
-;; Turn off backups and autosaves. @todo: remove this
-(setq make-backup-files nil)
-(setq auto-save-default nil)
-(setq delete-trailing-lines nil) ; Prevent from deleting EOF line
-(add-hook 'before-save-hook 'delete-trailing-whitespace)
-
-(setq-default truncate-lines t) ; @todo: doesn't work very well with line number
 
 
 ;; Requires >v24.4
@@ -140,8 +95,31 @@
 
 
 ;; Load lisp files by context
-(load (concat user-emacs-directory "cpp/cpp"))
-
-
+; C languages
+;(load (concat user-emacs-directory "c/init"))
 
 ;;; init.el ends here
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(git-gutter:added-sign " +")
+ '(git-gutter:deleted-sign " -")
+ '(git-gutter:lighter " GitG")
+ '(git-gutter:modified-sign " │")
+ '(git-gutter:separator-sign nil)
+ '(git-gutter:unchanged-sign nil)
+ '(git-gutter:update-interval 0)
+ '(git-gutter:visual-line t)
+ '(git-gutter:window-width 2)
+ '(package-selected-packages
+   (quote
+    (flycheck-google-cpplint use-package monokai-theme git-gutter flycheck editorconfig company))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
