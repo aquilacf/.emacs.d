@@ -1,4 +1,9 @@
 ;; -*- lexical-binding: t -*-
+;;; core.el --- Core of the framework.
+;;; Commentary: This should be loaded first and once.
+;;; Code:
+
+
 ;; Remove security vulnerability @todo: is it actually needed?
 (eval-after-load "enriched"
 	'(defun enriched-decode-display-prop (start end &optional param)
@@ -31,23 +36,23 @@
 )
 
 
-
-
 ;; Download a file from the internet
 (defun core:download (url p)
-	"Download any file"
-	(url-retrieve url
-		(lambda (s)
-			(re-search-forward "\r?\n\r?\n")
-			(write-region (point) (point-max) p)))
+  "Download any file from the internet.  It doesn't override the existing file."
 
+  (unless (file-exists-p p)
+    (url-retrieve url
+		  (lambda (s)
+		    (re-search-forward "\r?\n\r?\n")
+		    (write-region (point) (point-max) p)))
+    )
 )
+
 
 
 
 ;; Other configs
 (load-directory dir-settings)
-
 
 
 ;; Turn off backups and autosaves. @todo: Improve this

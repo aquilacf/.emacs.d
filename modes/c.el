@@ -2,8 +2,11 @@
 ;;; Commentary:
 ;;; Code:
 
-
+; Initializes the mode
 (mode:initialize "c")
+
+; Download google cpplint from github
+(core:download "https://raw.githubusercontent.com/google/styleguide/gh-pages/cpplint/cpplint.py" (concat dir-modes "c/cpplint.py"))
 
 ; Include flycheck-google-cppling since it's not on MELPA
 ;(load (concat user-emacs-directory "c/flycheck-google-cpplint"))
@@ -19,14 +22,5 @@
 
 
 
-; Download cpplint
-(unless (file-exists-p "c/cpplint.py") (core:download "https://raw.githubusercontent.com/google/styleguide/gh-pages/cpplint/cpplint.py" (concat dir-modes "cpplint.py")))
-
-
-
-
-
-
-
-;;; main.el ends here
+;;; c.el ends here
 
