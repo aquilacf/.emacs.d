@@ -21,8 +21,8 @@
 
 ;; Startup motivational message
 (defun display-startup-echo-area-message()
-  "Message that will display on the footer when opening EMACS."
-	(message "Let the hacking begin!"))
+  "Message that will display on the footer when opening EMACS.")
+;	(message "Let the hacking begin!"))
 
 
 

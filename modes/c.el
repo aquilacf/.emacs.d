@@ -20,7 +20,7 @@
 
 
 ; Download cpplint
-(unless (file-exists-p "c/cpplint.py") (core:download "https://raw.githubusercontent.com/google/styleguide/gh-pages/cpplint/cpplint.py" '(concat dir-modes "cpplint.py")))
+(unless (file-exists-p "c/cpplint.py") (core:download "https://raw.githubusercontent.com/google/styleguide/gh-pages/cpplint/cpplint.py" (concat dir-modes "cpplint.py")))
 
 
 
