@@ -6,7 +6,10 @@
 (mode:initialize "c")
 
 ; Download google cpplint from github
-(core:download "https://raw.githubusercontent.com/google/styleguide/gh-pages/cpplint/cpplint.py" (concat dir-modes "c/cpplint.py"))
+(core:download "https://raw.githubusercontent.com/google/styleguide/gh-pages/cpplint/cpplint.py" (concat dir-mode-c "priv.cpplint.py"))
+
+;;@todo: add flycheck
+
 
 ; Include flycheck-google-cppling since it's not on MELPA
 ;(load (concat user-emacs-directory "c/flycheck-google-cpplint"))

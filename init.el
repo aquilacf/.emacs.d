@@ -5,9 +5,16 @@
 ; Load core
 (load (concat user-emacs-directory "configs/core"))
 
+; Load customizations for modes
 (load-directory dir-modes)
 
 
+
+
+
+
+
+;@todo: decide about the remaining
 
 ;; Requires >v24.4
 ;; Install package repositories

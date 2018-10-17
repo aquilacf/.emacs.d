@@ -1,4 +1,5 @@
 ;;; flycheck-google-cpplint.el --- Help to comply with the Google C++ Style Guide
+;;; This is here because the repository is not maintained anymore.
 
 ;; Copyright (C) 2014  Akiha Senda
 

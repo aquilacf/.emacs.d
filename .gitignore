@@ -5,4 +5,4 @@ elpa/
 
 network-security.data
 
-cpp/cpplint.py
+priv.*

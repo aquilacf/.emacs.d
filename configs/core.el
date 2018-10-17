@@ -12,13 +12,14 @@
 
 ;; Set paths
 (setq root (expand-file-name user-emacs-directory))
-(setq dir-settings (concat root "configs/settings"))
+(setq dir-settings (concat root "configs/settings/"))
 (setq dir-snippets (concat root "snippets/"))
 ;(setq dir-backups (concat root "backups/"))
 ;(setq dir-autosaves (concat root "autosaves/"))
 (setq dir-modes (concat root "modes/"))
 
 
+;; Global functions
 
 ;; Function that loads all files in directory @todo: accept .elc files
 (defun load-directory (dir)
@@ -27,10 +28,12 @@
 			(mapc load-it (directory-files dir nil "\\.el$")))
 )
 
-;; Initialize mode @todo: setq dir-mode-X
+
+;; Initialize mode.
 (defun mode:initialize (mode)
-	(let (dir-mode)
-		(setq dir-mode (concat dir-modes mode))
+  (let (dir-mode)
+    (setq dir-mode (concat dir-modes mode "/"))
+    (set (intern (concat "dir-mode-" mode)) dir-mode) ; This line creates a dynamic variable dir-mode-'X' where 'X' is the mode. Tip from: https://www.rosettacode.org/wiki/Dynamic_variable_names#Emacs_Lisp
 		(unless (file-directory-p dir-mode)
 			(make-directory dir-mode)))
 )
@@ -51,7 +54,7 @@
 
 
 
-;; Other configs
+;; Load other less important configs
 (load-directory dir-settings)
 
 
@@ -60,6 +63,4 @@
 (setq auto-save-default nil)
 (setq delete-trailing-lines nil) ; Prevent from deleting EOF line
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
-
-
 
