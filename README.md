@@ -10,3 +10,7 @@ Emacs configs
 - editorconfig
 - flycheck
 
+
+
+# Tips
+Add the prefix "priv." to files that should be ignored.
