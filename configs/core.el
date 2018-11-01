@@ -35,7 +35,7 @@
     (setq dir-mode (concat dir-modes mode "/"))
     (set (intern (concat "dir-mode-" mode)) dir-mode) ; This line creates a dynamic variable dir-mode-'X' where 'X' is the mode. Tip from: https://www.rosettacode.org/wiki/Dynamic_variable_names#Emacs_Lisp
 		(unless (file-directory-p dir-mode)
-			(make-directory dir-mode)))
+			(make-directory dir-mode))) ; @todo Is this really necessary?
 )
 
 
