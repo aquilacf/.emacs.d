@@ -6,6 +6,8 @@
 (transient-mark-mode t)
 (xterm-mouse-mode t) ; enable mouse
 
+; Enable line numbers >v26
+(global-display-line-numbers-mode)
 
 ; Set unicode
 (prefer-coding-system 'utf-8)

@@ -4,7 +4,7 @@
 ;;; Code:
 
 
-;; Remove security vulnerability @todo: is it actually needed?
+;; Remove security vulnerability
 (eval-after-load "enriched"
 	'(defun enriched-decode-display-prop (start end &optional param)
 		(list start end)))

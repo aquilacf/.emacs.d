@@ -6,6 +6,7 @@
 (load (concat user-emacs-directory "configs/core"))
 
 ; Load customizations for modes
+;@todo: load mode at event load mode
 (load-directory dir-modes)
 
 
@@ -34,18 +35,8 @@
 (eval-when-compile
   (require 'use-package))
 
-;; Enable line numbers >v26
-(global-display-line-numbers-mode)
-
-
-;; Monokai theme >v26
-(use-package monokai-theme
-	:ensure t
-	:init
-		(load-theme 'monokai t))
 
 ;; GIT gutter
-;@TODO: all lines show as modified when idle, update-interval is off meanwhile
 (use-package git-gutter
 	:ensure t
 	:init
@@ -80,6 +71,7 @@
   :config
   (editorconfig-mode 1))
 
+
 ;; Flycheck @todo:finish this
 (use-package flycheck
 	:ensure t
@@ -87,23 +79,8 @@
 		(global-flycheck-mode))
 
 
-;; Company @todo: finish this
-(use-package company
-  :ensure t
-  :init (global-company-mode)
-  :config
-  (setq company-dabbrev-downcase nil
-	company-tooltip-align-annotations t
-	;; Navigation with M-<n>
-	company-show-numbers t))
 
 
-
-
-
-;; Load lisp files by context
-; C languages
-;(load (concat user-emacs-directory "c/init"))
 
 ;;; init.el ends here
 
