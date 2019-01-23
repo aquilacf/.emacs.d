@@ -1,4 +1,7 @@
-;; Key bindings
+;;; keybindings.el --- Frequent key bindings.
+;;; Commentary:
+;;; Code:
+
 ;; Scroll without moving cursor
 (global-set-key (kbd "M-n") (kbd "C-u 1 C-v"))
 (global-set-key (kbd "M-p") (kbd "C-u 1 M-v"))

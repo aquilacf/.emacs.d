@@ -23,7 +23,5 @@
 
 
 
-
-
 ;;; c.el ends here
 

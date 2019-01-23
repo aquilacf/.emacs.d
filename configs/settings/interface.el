@@ -1,3 +1,6 @@
+;;; interface.el --- Interface definitions.
+;;; Commentary:
+;;; Code:
 
 ;; Interface
 (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
@@ -32,3 +35,7 @@
 
 ;; Change all prompts to y or n
 (fset 'yes-or-no-p 'y-or-n-p)
+
+
+(setq delete-trailing-lines nil) ; Prevent from deleting EOF line
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
