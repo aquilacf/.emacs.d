@@ -19,6 +19,7 @@
 ;(setq dir-backups (concat root "backups/"))
 ;(setq dir-autosaves (concat root "autosaves/"))
 (setq dir-modes (concat root "modes/"))
+(setq dir-cache (concat root "cache/"))
 
 ;; Turn off backups and autosaves. @todo: Improve this
 (setq make-backup-files nil)
@@ -62,6 +63,17 @@
       (load f)
     )
   )
+)
+
+;; Compile project
+(defun core:compile()
+  "Compile all .el files in the project after first run."
+  (let (crt)
+    (setq crt (concat root "priv.compiled"))
+    (unless (file-exists-p crt)
+      ;@todo: add the function body here
+      (write-region nil "" crt))
+    )
 )
 
 

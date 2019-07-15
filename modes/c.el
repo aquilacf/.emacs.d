@@ -7,8 +7,13 @@
 
 ; Download google cpplint from github
 (core:download "https://raw.githubusercontent.com/google/styleguide/gh-pages/cpplint/cpplint.py" (concat dir-mode-c "priv.cpplint.py"))
+(core:download "https://raw.githubusercontent.com/google/styleguide/gh-pages/google-c-style.el" (concat dir-mode-c "priv.google-c-style.el"))
+
 
 ;;@todo: add flycheck
+
+
+
 
 
 ; Include flycheck-google-cppling since it's not on MELPA
@@ -18,6 +23,7 @@
 ;		      '(flycheck-googlelint-filter "-whitespace,+whitespace/braces")
 ;		      '(flycheck-googlelint-linelength "120"))
 ;(flycheck-add-next-checker 'c/c++-googlelint)
+
 
 
 

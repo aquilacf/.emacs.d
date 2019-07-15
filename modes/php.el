@@ -6,11 +6,17 @@
 
 ;; Download php-mode
 (use-package php-mode
-  :ensure t
-  :config 
-  	(php-mode)
+	:ensure t
+	:config
+		(php-mode)
 )
 
+(use-package geben
+	:ensure t
+	:config
+	(progn
+		(setq-default geben-temporary-file-directory
+			(concat dir-cache "geben"))))
 
 
 
