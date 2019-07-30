@@ -23,8 +23,10 @@
 (setq custom-file (concat dir-cache "priv.custom.el")) ; Remove custom-set-variables from init.el
 
 ;; Turn off backups and autosaves. @todo: Improve this
+(setq backup-inhibited t)
 (setq make-backup-files nil)
 (setq auto-save-default nil)
+(setq auto-save-list-file-prefix nil)
 
 
 
