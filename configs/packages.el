@@ -47,10 +47,13 @@
 
 
 ;; Monokai theme >v26
-;(use-package monokai-theme
-;	:ensure t
-;	:init
-;		(load-theme 'monokai t))
+(use-package monokai-theme
+	:ensure t
+	:init
+		(setq ;; Override foreground and background @todo: improve this
+			;monokai-foreground "#ABB2BF"
+			monokai-background "#000000")
+		(load-theme 'monokai t))
 
 
 
