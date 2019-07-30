@@ -26,8 +26,4 @@
 	(init-packages)
 ;)
 
-
-
 ;;; init.el ends here
-
-

@@ -1,8 +1,17 @@
-.DS_Store
-*.elc
-auto-save-list/
+# Directories
 elpa/
+cache/
+snippets/
+autosaves/
+backups/
 
-network-security.data
 
+# Compiled
+*.elc
+
+# Personal
 priv.*
+
+# Other
+.DS_Store
+network-security.data

@@ -19,10 +19,14 @@
 ;(setq dir-backups (concat root "backups/"))
 ;(setq dir-autosaves (concat root "autosaves/"))
 (setq dir-modes (concat root "modes/"))
+(setq dir-cache (concat root "cache/"))
+(setq custom-file (concat dir-cache "priv.custom.el")) ; Remove custom-set-variables from init.el
 
 ;; Turn off backups and autosaves. @todo: Improve this
+(setq backup-inhibited t)
 (setq make-backup-files nil)
 (setq auto-save-default nil)
+(setq auto-save-list-file-prefix nil)
 
 
 
@@ -64,6 +68,18 @@
   )
 )
 
+;; Compile project
+(defun core:compile()
+  "Compile all .el files in the project after first run."
+  (let (f)
+    (setq f (concat dir-cache "priv.compiled"))
+    (unless (file-exists-p f)
+      ;@todo: add the function body here
+      ;(byte-recompile-directory root)
+      (write-region nil "" f))
+    )
+)
+
 
 
 ;; Mode functions
@@ -84,7 +100,6 @@
 ;; Initialize use-packages.
 (defun init-packages ()
   "Initialize main packages."
-
   (load (concat dir-configs "packages"))
 )
 

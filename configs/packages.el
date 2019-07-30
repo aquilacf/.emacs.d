@@ -44,3 +44,34 @@
 ;; Eglot @todo: decide about this
 ;(use-package eglot
 ;  :ensure t)
+
+
+;; Monokai theme >v26
+(use-package monokai-theme
+	:ensure t
+	:init
+		(setq ;; Override foreground and background @todo: improve this
+			;monokai-foreground "#ABB2BF"
+			monokai-background "#000000")
+		(load-theme 'monokai t))
+
+
+
+
+;; Flycheck @todo:finish this
+;(use-package flycheck
+;	:ensure t
+;	:init
+;		(global-flycheck-mode))
+
+
+
+;; Company @todo: finish this
+;(use-package company
+; ; :ensure t
+;  :init (global-company-mode)
+;  :config
+;  (setq company-dabbrev-downcase nil
+;	company-tooltip-align-annotations t
+;	;; Navigation with M-<n>
+;	company-show-numbers t))
