@@ -41,5 +41,5 @@
 (fset 'yes-or-no-p 'y-or-n-p)
 
 
-;(setq delete-trailing-lines nil) ; Prevent from deleting EOF line
-;(add-hook 'before-save-hook 'delete-trailing-whitespace)
+(setq delete-trailing-lines nil) ; Prevent from deleting EOF line
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
