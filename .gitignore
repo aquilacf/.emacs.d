@@ -5,6 +5,8 @@ snippets/
 autosaves/
 backups/
 
+# Files
+projectile-bookmarks.eld
 
 # Compiled
 *.elc

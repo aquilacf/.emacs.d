@@ -13,11 +13,15 @@
 (global-display-line-numbers-mode)
 
 ; Set unicode
-(prefer-coding-system 'utf-8)
-(set-default-coding-systems 'utf-8)
-(set-terminal-coding-system 'utf-8)
-(set-keyboard-coding-system 'utf-8)
+
+;; UTF-8 as default encoding
+(set-language-environment "UTF-8")
+(prefer-coding-system 'utf-8-unix)
+(set-default-coding-systems 'utf-8-unix)
+(set-terminal-coding-system 'utf-8-unix)
+(set-keyboard-coding-system 'utf-8-unix)
 (setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING)) ; Treat clipboard input as UTF-8 string first.
+(set-buffer-file-coding-system 'utf-8-unix)
 
 
 ;; No welcome screen
@@ -37,5 +41,5 @@
 (fset 'yes-or-no-p 'y-or-n-p)
 
 
-(setq delete-trailing-lines nil) ; Prevent from deleting EOF line
-(add-hook 'before-save-hook 'delete-trailing-whitespace)
+;(setq delete-trailing-lines nil) ; Prevent from deleting EOF line
+;(add-hook 'before-save-hook 'delete-trailing-whitespace)
