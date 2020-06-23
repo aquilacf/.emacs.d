@@ -3,9 +3,9 @@
 ;;; Code:
 
 ;; Interface
-(if (fboundp 'menu-bar-mode) (menu-bar-mode nil))
-(if (fboundp 'tool-bar-mode) (tool-bar-mode nil))
-(if (fboundp 'scroll-bar-mode) (scroll-bar-mode nil))
+(if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
+(if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
+(if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 (transient-mark-mode t)
 (xterm-mouse-mode t) ; enable mouse
 
@@ -44,7 +44,7 @@
 (setq-default 	delete-trailing-lines t			; 	Delete useless empty lines at bottom.
 				delete-trailing-whitespace t	; 	Delete useless whitespaces.
 				indent-tabs-mode t				;	Tabs, not spaces.
-				tab-always-indent nil			;	Force tab insertion. @todo add shit-tab for 'compete
+				tab-always-indent nil			;	Force tab insertion.
 				tab-width 4)					;	Tab with.
 												; Editorconfig can override this.
 
