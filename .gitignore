@@ -1,18 +1,18 @@
 # Directories
 elpa/
-cache/
 snippets/
-autosaves/
-backups/
+.cache/
+.autosaves/
+.backups/
 
-# Files
-projectile-bookmarks.eld
 
 # Compiled
 *.elc
 
+
 # Personal
 priv.*
+
 
 # Other
 .DS_Store

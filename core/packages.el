@@ -18,7 +18,7 @@
 								'(git-gutter:visual-line t)
 		)
 		'(git-gutter:hide-gutter t)
-		(global-git-gutter-mode t) ; Enable git-gutter minot-mode for all projects.
+		(global-git-gutter-mode)
 
 	:config
 		(set-face-background 'git-gutter:added nil)
@@ -37,7 +37,7 @@
 (use-package editorconfig
 	:ensure t
 	:config
-		(editorconfig-mode 1) ; Enable editorconfig minor-mode for all projects.
+		(editorconfig-mode) ; Enable editorconfig minor-mode for all projects.
 )
 
 
@@ -50,27 +50,42 @@
 (use-package monokai-theme
 	:ensure t
 	:init
-		(setq ;; Override foreground and background @todo: improve this
-			;monokai-foreground "#ABB2BF"
-			monokai-background "#000000")
-		(load-theme 'monokai t))
+		(load-theme 'monokai t)
+)
 
 
 
 
 ;; Flycheck
-(use-package flycheck
-	:ensure t
-	:init
-	(global-flycheck-mode))
+; (use-package flycheck
+; 	:ensure t
+; 	:init
+; 	(global-flycheck-mode))
+
+
 
 ;; Projectile
 (use-package projectile
-  :ensure t
-  :config
-  ; (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
-  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
-  (projectile-mode +1))
+	:ensure t
+	:init
+		(custom-set-variables '(projectile-known-projects-file (concat dir-cache "projectile-bookmarks.eld")))
+	:config
+		(define-key projectile-mode-map (kbd "C-x p") 'projectile-command-map)
+		(projectile-mode)
+)
+
+
+(use-package use-package-ensure-system-package
+  :ensure t)
+
+;; Format code
+(use-package format-all
+	:after use-package-ensure-system-package
+	:ensure t
+	:ensure-system-package (prettier . prettier) ;; @move this to mode
+	:config
+		(add-hook 'clojure-mode-hook 'format-all-mode)
+)
 
 
 
@@ -83,3 +98,14 @@
 ;	company-tooltip-align-annotations t
 ;	;; Navigation with M-<n>
 ;	company-show-numbers t))
+
+
+
+
+
+; @todo treemacs
+
+
+; (use-package treemacs-projectile
+;   :after treemacs projectile
+;   :ensure t)

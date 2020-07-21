@@ -12,6 +12,9 @@
 ; Enable line numbers >v26
 (global-display-line-numbers-mode)
 
+;; Change all prompts to y or n
+(fset 'yes-or-no-p 'y-or-n-p)
+
 ; Set unicode
 
 ;; UTF-8 as default encoding
@@ -24,11 +27,10 @@
 (set-buffer-file-coding-system 'utf-8-unix)
 
 
-;; No welcome screen
-(setq inhibit-startup-message t
-      initial-scratch-message ""
-      initial-major-mode 'text-mode
-      inhibit-splash-screen t)
+
+;; Highlight matching parenthesis
+(setq show-paren-delay 0)
+(show-paren-mode t)
 
 
 ;; Startup motivational message
@@ -37,16 +39,21 @@
 ;	(message "Let the hacking begin!"))
 
 
-;; Change all prompts to y or n
-(fset 'yes-or-no-p 'y-or-n-p)
+;; No welcome screen
+(setq	inhibit-startup-message t
+		initial-scratch-message ""
+		initial-major-mode 'text-mode
+		inhibit-splash-screen t)
 
-												; Defaults for identation/trailing:
+
+;; Defaults for identation/trailing:
 (setq-default 	delete-trailing-lines t			; 	Delete useless empty lines at bottom.
 				delete-trailing-whitespace t	; 	Delete useless whitespaces.
 				indent-tabs-mode t				;	Tabs, not spaces.
 				tab-always-indent nil			;	Force tab insertion.
 				tab-width 4)					;	Tab with.
 												; Editorconfig can override this.
+
 
 
 (provide 'interface)

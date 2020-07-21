@@ -1,24 +1,28 @@
 ;;; init.el --- EMACS
-;;; Commentary:
+;;; Commentary: Requires >26.1
 ;;; Code:
 
-; Load core
-(load (concat user-emacs-directory "configs/core"))
+;;;;;;;;;;;;;;;
+;; Load core ;;
+;;;;;;;;;;;;;;;
+
+(load (concat user-emacs-directory "core/main"))
 
 
-;; Requires >26.1
-;; Install package repositories
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Setup package repositories ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 (require 'package)
 (setq package-enable-at-startup nil)
 (setq package-archives '(("melpa" . "https://melpa.org/packages/")
 						 ("gnu" . "https://elpa.gnu.org/packages/")))
-
 (package-initialize)
-
-;; Install use-package
 (unless (package-installed-p 'use-package)
-  (package-refresh-contents)
-  (package-install 'use-package))
+	(package-refresh-contents)
+	(package-install 'use-package)
+)
 
 ;; Start package manager @todo: is this really necessary? it's causing error process sentinel: args out of range with find-file-hook
 ;(eval-when-compile
