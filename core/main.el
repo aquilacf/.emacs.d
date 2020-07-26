@@ -20,13 +20,18 @@
 (setq dir-configs (concat root "core/configs/"))				; Configuration Settings
 (setq dir-core (concat root "core/"))							; Path of this directory
 
+
+
+
 																; Absolute Paths to:
 (setq dir-modes (concat root "modes/"))							;  - Custom Modes
 (setq dir-cache (concat root ".cache/"))						;  - Cache
 (setq dir-backups (concat root ".backups/"))					;  - Backups
 (setq dir-autosaves (concat root ".autosaves/"))				;  - Autosaves
 ;(setq dir-snippets (concat root "snippets/"))					;  - Snippets @todo: move to moves
+(setq package-user-dir (concat dir-cache "elpa/"))				;  - ELPA custom location
 (setq custom-file (concat dir-cache "priv.custom.el"))			;  - Move 'customcustom-set-variables'
+
 
 
 

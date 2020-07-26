@@ -2,7 +2,8 @@
 ;;; Commentary:
 ;;; Code:
 
-(add-hook 'find-file-hook 'core:load-mode)			; Init mode when a file is loaded.
+; Not in use yet.
+;(add-hook 'find-file-hook 'core:load-mode)			; Init mode when a file is loaded.
 
 (provide 'hooks)
 

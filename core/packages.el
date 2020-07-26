@@ -55,12 +55,91 @@
 
 
 
-
 ;; Flycheck
 ; (use-package flycheck
 ; 	:ensure t
 ; 	:init
 ; 	(global-flycheck-mode))
+
+
+
+
+
+(use-package use-package-ensure-system-package
+  :ensure t)
+
+;; Format code
+(use-package format-all
+	:after use-package-ensure-system-package
+	:ensure-system-package
+		(
+			(yarn 		. yarn)
+			(prettier 	. "yarn global add prettier @prettier/plugin-php prettier-plugin-pkg prettier-plugin-toml")
+		)
+	:ensure t
+)
+
+
+;; Major Modes
+
+(use-package typescript-mode
+	:ensure t
+	:mode ("\\.ts[x]?\\'" . typescript-mode)
+	;:ensure-system-package (prettier . prettier)
+	:ensure-system-package
+		(tsc . "yarn global add typescript")
+	:hook
+		(typescript-mode . format-all-mode)
+)
+
+(use-package yaml-mode
+	:ensure t
+	:hook
+		(yaml-mode . format-all-mode)
+)
+
+(use-package toml-mode
+	:ensure t
+)
+
+
+(use-package json-mode
+	:ensure t
+	:hook
+		(json-mode . format-all-mode)
+)
+
+(use-package graphql-mode
+	:ensure t
+	:hook
+		(graphql-mode . format-all-mode)
+)
+
+(use-package markdown-mode
+	:ensure t
+	:hook
+		(markdown-mode . format-all-mode)
+)
+
+(use-package php-mode
+	:ensure t
+	:config
+		(add-hook 'php-mode-hook 'php-enable-psr2-coding-style)
+		(setq php-template-compatibility nil)
+		(setq php-lineup-cascaded-calls t)
+	:hook
+		(php-mode . format-all-mode)
+)
+
+(use-package terraform-mode
+	:ensure t
+	:ensure-system-package (terraform . terraform)
+	:hook
+		; @todo: https://github.com/lassik/emacs-format-all-the-code/pull/84
+		(terraform-mode . format-all-mode)
+)
+
+
 
 
 
@@ -75,17 +154,15 @@
 )
 
 
-(use-package use-package-ensure-system-package
-  :ensure t)
 
-;; Format code
-(use-package format-all
-	:after use-package-ensure-system-package
-	:ensure t
-	:ensure-system-package (prettier . prettier) ;; @move this to mode
-	:config
-		(add-hook 'clojure-mode-hook 'format-all-mode)
-)
+
+
+(projectile-register-project-type 'npm '("package.json")
+				  :compile "yarn install"
+				  :test "yarn test"
+				  :run "yarn start"
+				  :test-suffix ".spec")
+
 
 
 
