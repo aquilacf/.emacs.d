@@ -110,10 +110,13 @@
 
 (use-package lsp-mode					; @todo
 	:commands (lsp lsp-deferred)
+	:ensure-system-package
+		(bash-language-server . "yarn global add bash-language-server")
 	:hook
 	(
 		(typescript-mode 	. lsp-deferred)
 		(js-mode 			. lsp-deferred)
+		(sh-mode			. lsp-deferred)
 	)
 	:custom
 	(
@@ -124,6 +127,10 @@
 		(lsp-prefer-flymake t)
 		(lsp-enable-indentation nil)
 		(lsp-semantic-highlighting t)
+
+		(lsp-bash-explainshell-endpoint t)
+		(lsp-bash-highlight-parsing-errors t)
+		(lsp-bash-glob-pattern t)
 	)
 	:config
 	(lsp-register-client
@@ -134,5 +141,3 @@
 	)
 	(add-hook 'terraform-mode-hook #'lsp-deferred)
 )
-
-
