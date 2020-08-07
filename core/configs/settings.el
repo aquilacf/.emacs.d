@@ -3,6 +3,7 @@
 ;;; Code:
 
 ;; Turn off backups and autosaves. @todo: Improve this
+(setq create-lockfiles nil)
 (setq backup-inhibited t)
 (setq make-backup-files nil)
 (setq auto-save-default nil)
@@ -12,6 +13,8 @@
 (core:mkdir dir-cache)
 (core:mkdir dir-backups)
 (core:mkdir dir-autosaves)
+
+(global-auto-revert-mode t) ; Refresh file if modified.
 
 (provide 'settings)
 

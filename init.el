@@ -2,12 +2,14 @@
 ;;; Commentary: Requires >26.1
 ;;; Code:
 
+;(setq gc-cons-threshold (* 1024 1024 100))
+;(setq file-name-handler-alist nil)
+
 ;;;;;;;;;;;;;;;
 ;; Load core ;;
 ;;;;;;;;;;;;;;;
 
 (load (concat user-emacs-directory "core/main"))
-
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

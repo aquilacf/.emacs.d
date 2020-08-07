@@ -7,16 +7,16 @@
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 (transient-mark-mode t)
-(xterm-mouse-mode t) ; enable mouse
+(xterm-mouse-mode t)	; Enable mouse.
+(setq visible-bell t)	; Disable annoying bell.
 
 ; Enable line numbers >v26
 (global-display-line-numbers-mode)
 
-;; Change all prompts to y or n
+; Change all prompts to y or n
 (fset 'yes-or-no-p 'y-or-n-p)
 
 ; Set unicode
-
 ;; UTF-8 as default encoding
 (set-language-environment "UTF-8")
 (prefer-coding-system 'utf-8-unix)
@@ -29,8 +29,10 @@
 
 
 ;; Highlight matching parenthesis
+(set-face-attribute 'show-paren-match nil :foreground 'unspecified :background 'unspecified :weight 'extra-bold :underline t)
 (setq show-paren-delay 0)
 (show-paren-mode t)
+(setq show-paren-style 'parenthesis) ; 'expression , 'parenthesis , 'mixed
 
 
 ;; Startup motivational message
@@ -46,14 +48,23 @@
 		inhibit-splash-screen t)
 
 
-;; Defaults for identation/trailing:
+												;; Defaults for identation/trailing:
 (setq-default 	delete-trailing-lines t			; 	Delete useless empty lines at bottom.
 				delete-trailing-whitespace t	; 	Delete useless whitespaces.
 				indent-tabs-mode t				;	Tabs, not spaces.
-				tab-always-indent nil			;	Force tab insertion.
+				tab-always-indent 'complete		;	Force tab insertion.
 				tab-width 4)					;	Tab with.
 												; Editorconfig can override this.
+(electric-indent-mode -1)
+(setq-default backward-delete-char-untabify-method nil)
 
+
+; (setq whitespace-style '(face tabs tab-mark trailing))
+; (custom-set-faces
+;  '(whitespace-tab ((t (:foreground "#636363")))))
+; (setq whitespace-display-mappings
+;   '((tab-mark 9 [124 9] [92 9]))) ; 124 is the ascii ID for '\|'
+; (global-whitespace-mode)
 
 
 (provide 'interface)
