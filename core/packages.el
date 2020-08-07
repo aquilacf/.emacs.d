@@ -62,10 +62,26 @@
 		(typescript-mode . format-all-mode)
 )
 
-(use-package yaml-mode		:hook (yaml-mode . format-all-mode))
 (use-package toml-mode		:hook (yaml-mode . format-all-mode))
-(use-package json-mode		:hook (json-mode . format-all-mode))
 (use-package markdown-mode	:hook (markdown-mode . format-all-mode))
+
+(use-package yaml-mode
+	:custom
+	(
+		(lsp-yaml-format-enable nil)
+		(lsp-yaml-schemas t)
+	)
+	:ensure-system-package
+		(yaml-language-server . "yarn global add yaml-language-server")
+	:hook (yaml-mode . format-all-mode)
+)
+
+(use-package json-mode
+	:custom (lsp-json-schemas t)
+	:ensure-system-package
+		(vscode-json-languageserver . "yarn global add vscode-json-languageserver")
+	:hook (json-mode . format-all-mode)
+)
 
 (use-package graphql-mode
 	:ensure-system-package
@@ -117,6 +133,8 @@
 		(bash-language-server . "yarn global add bash-language-server")
 	:hook
 	(
+		(yaml-mode			. lsp-deferred)
+		(json-mode			. lsp-deferred)
 		(typescript-mode 	. lsp-deferred)
 		(js-mode 			. lsp-deferred)
 		(sh-mode			. lsp-deferred)
