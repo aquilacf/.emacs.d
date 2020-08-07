@@ -5,7 +5,6 @@
 (setq use-package-always-ensure t)
 (use-package use-package-ensure-system-package)
 
-
 (use-package monokai-theme	:init (load-theme 'monokai t))
 (use-package which-key		:config (which-key-mode))						; @todo
 (use-package yasnippet		:config (yas-global-mode))
@@ -14,7 +13,6 @@
 
 
 (use-package format-all
-	:after use-package-ensure-system-package
 	:ensure-system-package
 	(
 		(yarn 		. yarn)
@@ -67,8 +65,13 @@
 (use-package yaml-mode		:hook (yaml-mode . format-all-mode))
 (use-package toml-mode		:hook (yaml-mode . format-all-mode))
 (use-package json-mode		:hook (json-mode . format-all-mode))
-(use-package graphql-mode	:hook (graphql-mode . format-all-mode))
 (use-package markdown-mode	:hook (markdown-mode . format-all-mode))
+
+(use-package graphql-mode
+	:ensure-system-package
+		(graphql-lsp . "yarn global add graphql-language-service-cli graphql")
+	:hook (graphql-mode . format-all-mode)
+)
 
 (use-package php-mode
 	:config
@@ -117,6 +120,8 @@
 		(typescript-mode 	. lsp-deferred)
 		(js-mode 			. lsp-deferred)
 		(sh-mode			. lsp-deferred)
+		(graphql-mode		. lsp-deferred)
+		(terraform-mode		. lsp-deferred)
 	)
 	:custom
 	(
@@ -139,5 +144,12 @@
 							:server-id 'terraform-ls
 		)
 	)
-	(add-hook 'terraform-mode-hook #'lsp-deferred)
+	(lsp-register-client
+		(make-lsp-client	:new-connection (lsp-stdio-connection '("graphql-lsp" "server" "--method" "stream"))
+							:major-modes '(graphql-mode)
+							:server-id 'graphql-lsp
+		)
+	)
+	(add-to-list 'lsp-language-id-configuration '(graphql-mode . "graphql"))
+
 )
