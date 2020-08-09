@@ -29,7 +29,7 @@
 ;; Start package manager @todo: is this really necessary? it's causing error process sentinel: args out of range with find-file-hook
 ;(eval-when-compile
 ;	(require 'use-package)
-(init-packages)
+(core:init-packages)
 ;)
 
 ;;; init.el ends here

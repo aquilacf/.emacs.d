@@ -14,6 +14,9 @@
 (global-set-key (kbd "C-S-k") (lambda() (interactive) (kill-line 0)))	; Kill line backwards. Won't work on Mac Terminal.
 
 
+(global-unset-key (kbd "C-t"))				; Reserved for tmux.
+
+
 (defun utilities:read-kbd ()
 
 	"Scan keybindings."

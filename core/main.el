@@ -124,7 +124,7 @@
 
 (defun mode:initialize (mode)
 
-	"Initialize a major mode." ;@todo: (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-mode))
+	"Initialize a major mode. Currently not being in use."
 
 	(let (dir-mode)
 		(setq dir-mode (concat dir-modes mode "/"))
@@ -140,7 +140,7 @@
 ;; Init functions ;;
 ;;;;;;;;;;;;;;;;;;;;
 
-(defun init-packages ()
+(defun core:init-packages ()
 
 	"Initialize main packages."
 

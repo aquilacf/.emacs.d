@@ -5,11 +5,12 @@
 (setq use-package-always-ensure t)
 (use-package use-package-ensure-system-package)
 
-(use-package monokai-theme	:init (load-theme 'monokai t))
-(use-package which-key		:config (which-key-mode))						; @todo
-(use-package yasnippet		:config (yas-global-mode))
-(use-package editorconfig	:config (editorconfig-mode))
-(use-package smartparens	:config (smartparens-global-mode t))
+(use-package monokai-theme		:init (load-theme 'monokai t))
+(use-package which-key			:config (which-key-mode))						; @todo
+(use-package yasnippet			:config (yas-global-mode))
+(use-package yasnippet-snippets	:after (yasnippet))
+(use-package editorconfig		:config (editorconfig-mode))
+(use-package smartparens		:config (smartparens-global-mode t))
 
 
 (use-package format-all
@@ -18,6 +19,40 @@
 		(yarn 		. yarn)
 		(prettier 	. "yarn global add prettier @prettier/plugin-php prettier-plugin-pkg prettier-plugin-toml")
 	)
+)
+
+(use-package projectile
+	:custom
+		(projectile-known-projects-file (concat dir-cache "projectile-bookmarks.eld"))
+	:config
+		(define-key projectile-mode-map (kbd "C-x p") 'projectile-command-map)
+		(projectile-mode)
+)
+
+(projectile-register-project-type 'npm '("package.json")
+				  :compile "yarn install"
+				  :test "yarn test"
+				  :run "yarn start"
+				  :test-suffix ".spec"
+)
+
+(use-package company
+	:custom
+		(
+			(company-idle-delay 0)
+			(company-echo-delay 0)
+			(company-show-numbers t)
+			(company-dabbrev-downcasbe nil)
+			(company-selection-wrap-around t)
+			(company-global-modes '(not org-mode))
+		)
+	:config
+		(global-company-mode)
+)
+(use-package company-quickhelp
+	:after (company)
+	:config
+		(company-quickhelp-mode)
 )
 
 
@@ -48,6 +83,10 @@
 ;; Major Modes ;;
 ;;;;;;;;;;;;;;;;;
 
+(use-package powershell)
+(use-package toml-mode		:hook (yaml-mode . format-all-mode))
+(use-package markdown-mode	:hook (markdown-mode . format-all-mode))
+
 (use-package typescript-mode
 	:custom
 		(lsp-clients-typescript-server-args '("--stdio" "--tsserver-log-file" "/tmp/tsserver.log"))
@@ -61,9 +100,6 @@
 	:hook
 		(typescript-mode . format-all-mode)
 )
-
-(use-package toml-mode		:hook (yaml-mode . format-all-mode))
-(use-package markdown-mode	:hook (markdown-mode . format-all-mode))
 
 (use-package yaml-mode
 	:custom
@@ -106,26 +142,11 @@
 	)
 	:hook (terraform-mode . format-all-mode)
 )
-
-
-
-(use-package projectile
-	:custom
-		(projectile-known-projects-file (concat dir-cache "projectile-bookmarks.eld"))
-	:config
-		(define-key projectile-mode-map (kbd "C-x p") 'projectile-command-map)
-		(projectile-mode)
+(use-package company-terraform
+	:after (terraform-mode company)
+	:hook
+		(terraform-mode . company-terraform-init)
 )
-
-(projectile-register-project-type 'npm '("package.json")
-				  :compile "yarn install"
-				  :test "yarn test"
-				  :run "yarn start"
-				  :test-suffix ".spec")
-
-
-(use-package company)					; @todo
-
 
 (use-package lsp-mode					; @todo
 	:commands (lsp lsp-deferred)
@@ -171,3 +192,4 @@
 	(add-to-list 'lsp-language-id-configuration '(graphql-mode . "graphql"))
 
 )
+(use-package lsp-ui	:after (lsp-mode))
