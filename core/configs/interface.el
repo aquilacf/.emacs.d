@@ -10,8 +10,23 @@
 (xterm-mouse-mode t)	; Enable mouse.
 (setq visible-bell t)	; Disable annoying bell.
 
+
+; (setq redisplay-dont-pause t
+;   scroll-margin 1
+;   scroll-step 1
+;   scroll-conservatively 10000
+;   scroll-preserve-screen-position 1)
+
+;; Smoother and nicer scrolling
+; (setq scroll-margin 10
+;    scroll-step 1
+;    next-line-add-newlines nil
+;    scroll-conservatively 10000
+;    scroll-preserve-screen-position 1)
+
 ; Enable line numbers >v26
 (global-display-line-numbers-mode)
+(global-visual-line-mode)
 
 ; Change all prompts to y or n
 (fset 'yes-or-no-p 'y-or-n-p)

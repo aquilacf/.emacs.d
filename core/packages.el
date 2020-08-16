@@ -5,13 +5,22 @@
 (setq use-package-always-ensure t)
 (use-package use-package-ensure-system-package)
 
-(use-package monokai-theme		:init (load-theme 'monokai t))
-(use-package which-key			:config (which-key-mode))						; @todo
-(use-package yasnippet			:config (yas-global-mode))
-(use-package yasnippet-snippets	:after (yasnippet))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Formatting and Visual ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; (use-package monokai-theme		:init (load-theme 'monokai t)
+; 	:config
+; 	(set-face-background 'default "undefined")
+	; (set-face-attribute 'fringe nil
+ ;                      :foreground (face-foreground 'default)
+ ;                      :background (face-background 'default))
+; )
+(use-package monokai-pro-theme	:init (load-theme 'monokai-pro t))
+
+(use-package which-key			:config (which-key-mode))
 (use-package editorconfig		:config (editorconfig-mode))
 (use-package smartparens		:config (smartparens-global-mode t))
-
 
 (use-package format-all
 	:ensure-system-package
@@ -21,6 +30,22 @@
 	)
 )
 
+; (use-package doom-modeline
+; 	:ensure t
+; 	:init (doom-modeline-mode)
+; )
+
+(use-package flycheck
+	; :custom
+	; 	(flycheck-highlighting-mode 'lines)
+;	:config
+		;(set-face-attribute 'flycheck-error nil :underline '(:color "red2" :style wave))
+	;	(set-face-attribute 'flycheck-error nil :background "red" :foreground "white" :slant 'italic )
+)
+
+;;;;;;;;;;;;;;;;
+;; Navigation ;;
+;;;;;;;;;;;;;;;;
 (use-package projectile
 	:custom
 		(projectile-known-projects-file (concat dir-cache "projectile-bookmarks.eld"))
@@ -36,25 +61,95 @@
 				  :test-suffix ".spec"
 )
 
+(use-package treemacs
+	:custom
+	(
+		(treemacs-follow-mode t)
+		(treemacs-filewatch-mode t)
+		(treemacs-fringe-indicator-mode t)
+	)
+	:bind
+		("M-0" . treemacs)
+		; ("M-0"       . treemacs-select-window)
+  ;       ("C-c t t"   . treemacs)
+  ;       ("C-c t a"   . treemacs-add-and-display-current-project)
+)
+
+
+(use-package treemacs-projectile
+	:after (treemacs projectile)
+	:config
+		(advice-add 'projectile-switch-project-by-name :after #'(lambda (&rest args)
+																	(let* ((path (car args))
+																		(name (treemacs--filename path)))
+          															(treemacs-do-add-project-to-workspace path name))))
+)
+
+
+;;;;;;;;;;;;;;;;
+;; Completion ;;
+;;;;;;;;;;;;;;;;
+(use-package yasnippet			:config (yas-global-mode))
+(use-package yasnippet-snippets	:after (yasnippet))
+
 (use-package company
 	:custom
 		(
-			(company-idle-delay 0)
+			(company-idle-delay 1)
 			(company-echo-delay 0)
 			(company-show-numbers t)
-			(company-dabbrev-downcasbe nil)
 			(company-selection-wrap-around t)
-			(company-global-modes '(not org-mode))
+			(company-minimum-prefix-length 3)
+			(company-tooltip-align-annotations t)
+			(company-dabbrev-downcase nil)
+			;(company-frontends '(company-box-frontend))
 		)
+	:bind
+	(
+		:map company-active-map
+			("RET" . nil)
+			("TAB" . company-complete-selection)
+			("<tab>" . company-complete-selection)
+			("C-s" . company-complete-selection)  ; Mostly to use during yasnippet expansion
+			("C-n" . company-select-next)
+			("C-p" . company-select-previous)
+	)
 	:config
 		(global-company-mode)
 )
 (use-package company-quickhelp
 	:after (company)
-	:config
-		(company-quickhelp-mode)
+	:custom
+		(company-quickhelp-delay 0)
+	:hook (company-mode . company-quickhelp-mode)
+)
+(use-package company-quickhelp-terminal
+	:after (company-quickhelp)
+	:hook (company-mode . company-quickhelp-terminal-mode)
+)
+(use-package company-box
+	:after (company)
+	:custom
+	(
+		(company-box-show-single-candidate t)
+  		(company-box-backends-colors nil) ;; Same colors for all backends
+	)
+	:custom-face
+		(company-box-selection ((t (:inherit company-tooltip-selection :extend t))))
+	:hook
+		(company-mode . company-box-mode)
+)
+(use-package company-statistics
+	:after (company)
+	:custom (company-statistics-file (concat dir-cache "company-statistics-cache.el"))
+	:hook (company-mode . company-statistics-mode)
 )
 
+
+
+;;;;;;;;;;;;;;;;;;;;;
+;; Version Control ;;
+;;;;;;;;;;;;;;;;;;;;;
 
 (use-package git-gutter
 	:custom
@@ -77,6 +172,7 @@
 		(set-face-attribute 'git-gutter:unchanged nil :inherit 'default :foreground 'unspecified :background 'unspecified)
 		(global-git-gutter-mode)
 )
+
 
 
 ;;;;;;;;;;;;;;;;;
@@ -148,7 +244,13 @@
 		(terraform-mode . company-terraform-init)
 )
 
-(use-package lsp-mode					; @todo
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Language Server Protocol ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(use-package lsp-mode
 	:commands (lsp lsp-deferred)
 	:ensure-system-package
 		(bash-language-server . "yarn global add bash-language-server")
@@ -161,6 +263,8 @@
 		(sh-mode			. lsp-deferred)
 		(graphql-mode		. lsp-deferred)
 		(terraform-mode		. lsp-deferred)
+
+		(lsp-mode . lsp-enable-which-key-integration)
 	)
 	:custom
 	(
@@ -168,7 +272,6 @@
 		(lsp-eldoc-render-all nil)
 		(lsp-session-file (concat dir-cache ".lsp-session-v1"))
 		(lsp-keymap-prefix "s-l")
-		(lsp-prefer-flymake t)
 		(lsp-enable-indentation nil)
 		(lsp-semantic-highlighting t)
 
@@ -190,6 +293,10 @@
 		)
 	)
 	(add-to-list 'lsp-language-id-configuration '(graphql-mode . "graphql"))
-
 )
 (use-package lsp-ui	:after (lsp-mode))
+
+
+
+
+;(use-package dap-mode :after (lsp-mode))

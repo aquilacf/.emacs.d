@@ -13,7 +13,7 @@
 (global-set-key (kbd "RET") 'newline-and-indent) ; Not perfect.
 (global-set-key (kbd "C-S-k") (lambda() (interactive) (kill-line 0)))	; Kill line backwards. Won't work on Mac Terminal.
 
-
+;(global-set-key (kbd "M-§") 'tab-to-tab-stop) ; test
 (global-unset-key (kbd "C-t"))				; Reserved for tmux.
 
 
@@ -25,3 +25,19 @@
 	(message (key-description (vector (read-key "Type a key: "))))
 
 )
+
+
+
+
+
+
+
+;; Both command keys are 'Super'
+(setq mac-right-command-modifier 'super)
+(setq mac-command-modifier 'super)
+
+;; Option or Alt is naturally 'Meta'
+(setq mac-option-modifier 'meta)
+
+;; Right Alt (option) can be used to enter symbols like em dashes '—' and euros '€' and stuff.
+(setq mac-right-option-modifier 'nil)
